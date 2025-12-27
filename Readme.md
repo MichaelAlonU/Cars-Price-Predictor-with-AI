@@ -118,7 +118,7 @@ POST /retrain
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/car-price-predictor.git
+git clone https://github.com/MichaelAlonU/Cars-Price-Predictor-with-AI.git
 cd car-price-predictor
 ```
 
