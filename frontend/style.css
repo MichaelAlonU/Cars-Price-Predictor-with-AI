@@ -1,0 +1,136 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* BACKGROUND */
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #0f2027, #05090c);
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD */
+.container {
+    width: 420px;
+    padding: 30px;
+    background: rgba(20, 30, 40, 0.85);
+    border-radius: 16px;
+    box-shadow:
+        0 0 25px rgba(0, 255, 255, 0.15),
+        inset 0 0 20px rgba(0, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #7fffd4;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #7fffd4;
+}
+
+/* LABELS */
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #9fdcdc;
+}
+
+/* SELECT & INPUT */
+select,
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(127, 255, 212, 0.25);
+    background: rgba(10, 20, 25, 0.9);
+    color: #e0ffff;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+select:hover,
+input:hover {
+    border-color: #7fffd4;
+}
+
+select:focus,
+input:focus {
+    border-color: #00ffe0;
+    box-shadow: 0 0 10px rgba(0, 255, 224, 0.3);
+}
+
+/* BUTTONS */
+button {
+    width: 100%;
+    margin-top: 22px;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #00ffe0, #00bcd4);
+    color: #003333;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 255, 224, 0.4);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* RESULT */
+#result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #00ffe0;
+}
+
+/* LEARN BOX */
+#learnBox {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(127, 255, 212, 0.3);
+}
+
+/* SMALL TEXT */
+small {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: #7aa;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+    }
+}

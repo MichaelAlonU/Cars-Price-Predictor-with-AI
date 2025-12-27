@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Car Price Predictor</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1> Car Price Predictor </h1>
+    <h2>Choose your car</h2>
+
+    <div class="container">
+
+        <select id="brand" onchange="loadModels()"></select>
+        <select id="model" onchange="loadYears()"></select>
+        <select id="year" onchange="loadEngines()"></select>
+        <select id="engine_size"></select>
+
+        <button onclick="predict()">Predict</button>
+        <p id="result"></p>
+
+        <div id="learnBox" style="display:none">
+            <input type="number" id="newPrice" placeholder="Price not correct? Enter a new one">
+            <button onclick="learn()">Save price</button>
+        </div>
+    </div>
+    <script>
+        const API = 'http://127.0.0.1:5000';
+
+        async function loadBrands() {
+            const r = await axios.get(API + '/brands');
+            brand.innerHTML = r.data.map(b => `<option>${b}</option>`).join('');
+            loadModels();
+        }
+
+        async function loadModels() {
+            const r = await axios.get(`${API}/models/${brand.value}`);
+            model.innerHTML = r.data.map(m => `<option>${m}</option>`).join('');
+            loadYears();
+        }
+
+        async function loadYears() {
+            const r = await axios.get(`${API}/years/${brand.value}/${model.value}`);
+            year.innerHTML = r.data.map(y => `<option>${y}</option>`).join('');
+            loadEngines();
+        }
+
+        async function loadEngines() {
+            const r = await axios.get(
+                `${API}/engines/${brand.value}/${model.value}/${year.value}`
+            );
+            engine_size.innerHTML = r.data.map(e => `<option>${e}</option>`).join('');
+        }
+
+        async function predict() {
+            const r = await axios.post(API + '/predict', {
+                brand: brand.value,
+                model: model.value,
+                year: year.value,
+                engine_size: engine_size.value
+            });
+            result.innerText = 'Predicted price: ' + r.data.predicted_price +"$";
+            learnBox.style.display = 'block';
+        }
+
+        async function learn() {
+            const price = Number(newPrice.value);
+            if (price <= 0) return alert('Invalid price');
+
+            const r = await axios.post(API + '/learn', {
+                brand: brand.value,
+                model: model.value,
+                year: year.value,
+                engine_size: engine_size.value,
+                price
+            });
+
+            if (r.data.status === 'saved') {
+                await axios.post(API + '/retrain');
+            }
+
+            alert(r.data.status);
+        }
+
+        loadBrands();
+    </script>
